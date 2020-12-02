@@ -5,6 +5,9 @@ class Employee {
         this.salary = salary;
         this.boss = boss;
     }
+    bonus(multiplyer){
+        let nonManBonus = this.salary * multiplyer;
+    }
 }
 
 module.exports = Employee;
