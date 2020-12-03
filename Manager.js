@@ -6,23 +6,37 @@ class Manager extends Employee {
         this.employees = employees;
     }
     bonus(multiplyer){
-        let empArray = [];
-      for (let i = 0; i < this.employees.length; i++){
-          let employee = this.employees[i];
-            empArray.push(employee.salary);
-      }
-      const total = empArray.reduce((ac, el) => {
-          return ac + el;
-      })
-      return total * multiplyer;
+
+        return multiplyer * this.totalSubsalary();
+    }
+
+    totalSubsalary() {
+        let totalSal = this.salary;
+        for (let i = 0; i < this.employees.length; i++) {
+            let employee = this.employees[i];
+            if (employee instanceof Manager) {
+                totalSal += employee.totalSubsalary();
+            } else {
+                totalSal += employee.salary;
+            }
+        }
+       return totalSal;
     }
 }
 
-const one = new Employee('one', 'peon', 1000, 'Ted');
-const two = new Employee('two', 'peon', 2000, 'Ted');
-const three = new Employee('three', 'peon', 3000, 'Ted');
+const lily = new Employee('Lily', 'TA', 90000, "Susie")
+const clifford = new Employee('Clifford', 'TA', 90000, "Susie")
+const susie = new Manager('Susie', 'TA', 100000, "Calvin", [lily, clifford])
+const calvin = new Manager('Calvin', 'Director', 130000, 'Hobbes', [susie])
+const hobbes = new Manager('Hobbes', 'Founder', 1000000, null, [calvin])
 
-let array = [one, two, three];
+console.log(hobbes.bonus(.05));
 
-const theMan = new Manager('Manny', 'Manager', 10000000, 'no', array);
-console.log(theMan.bonus(2));
+// Imagine you have a company structured like this:
+
+// Name	    Salary	Title	    Boss
+// Hobbes	1000000	Founder	    null
+// Calvin	130000	Director	Hobbes
+// Susie	100000	TA Manager	Calvin
+// Lily	    90000	TA	Susie
+// Clifford	90000	TA	Susie
