@@ -7,6 +7,7 @@ class Employee {
     }
     bonus(multiplyer){
         let nonManBonus = this.salary * multiplyer;
+        return nonManBonus;
     }
 }
 

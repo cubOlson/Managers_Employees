@@ -31,6 +31,10 @@ const calvin = new Manager('Calvin', 'Director', 130000, 'Hobbes', [susie])
 const hobbes = new Manager('Hobbes', 'Founder', 1000000, null, [calvin])
 
 console.log(hobbes.bonus(.05));
+console.log(calvin.bonus(.05));
+console.log(susie.bonus(.05));
+console.log(clifford.bonus(.05));
+console.log(lily.bonus(.05));
 
 // Imagine you have a company structured like this:
 
